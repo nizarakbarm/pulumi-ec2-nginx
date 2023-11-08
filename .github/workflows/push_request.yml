@@ -36,8 +36,22 @@ jobs:
         env:
           PULUMI_ACCESS_TOKEN: ${{secrets.PULUMI_ACCESS_TOKEN}}
           PUBLIC_KEY: ${{secrets.PUBLIC_KEY}}
-      - name: Sleep for 5 minutes
-        run: sleep 300s
+      - name: Test curl to nginx
+        env: 
+          EC2_IP: ${{ env.EC2_IP }}
+        run: |
+          CODE=`curl --write-out '%{http_code}' -XGET https://$EC2_IP \
+          --silent \
+          --output /dev/null`
+          if [[ $CODE != "200" ]]
+          then
+            echo "FAILURE"
+          else
+            echo "SUCCESS"
+          fi
+
+      - name: Sleep for 1 minutes
+        run: sleep 60s
         shell: bash
       - uses: pulumi/actions@v4
         with:
