@@ -39,15 +39,7 @@ jobs:
       - name: test curl ip
         env:
           URL: "http://${{ steps.pulumi.outputs.public_ip }}"
-        run: |
-          CODE=`curl -XGET $URL --write-out '%{http_code}' -s -o /dev/null `
-          if [[ $CODE!="200" ]]
-          then
-            echo "FAILED"
-          else
-            echo "SUCCESS"
-          fi
-
+        run: curl -XGET $URL --write-out '%{http_code}' -s -o /dev/null
       - name: Sleep for 1 minutes
         run: sleep 60s
         shell: bash
