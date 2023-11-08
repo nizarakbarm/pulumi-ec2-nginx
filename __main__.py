@@ -44,7 +44,6 @@ security_group = aws.ec2.SecurityGroup("Security Group EC2",
             to_port=443,
             protocol="tcp",
             cidr_blocks=['0.0.0.0/0']),
-            )
         ]
 )
 print("Security group creation complete...")
