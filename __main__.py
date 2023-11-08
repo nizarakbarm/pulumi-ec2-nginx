@@ -63,8 +63,9 @@ server = aws.ec2.Instance("nginx",
 
 print("EC2 Instance Creation Complete...")
 
-http_ec2_ip='http://{ip}'.format(ip=str(server.public_ip))
-print(http_ec2_ip)
+http_ec2_ip = server.public_ip.name.apply(
+    lambda name: "http://" + name
+)
 r = requests.get(str(http_ec2_ip))
 
 pulumi.export('public_ip', server.public_ip)
