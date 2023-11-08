@@ -30,6 +30,7 @@ jobs:
       #     PULUMI_ACCESS_TOKEN: ${{secrets.PULUMI_ACCESS_TOKEN}}
       #     PUBLIC_KEY: ${{secrets.PUBLIC_KEY}}
       - uses: pulumi/actions@v4
+        id: 'pulumi'
         with:
           command: up
           stack-name: ${{vars.STACK}}
