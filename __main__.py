@@ -2,8 +2,6 @@ import os
 import pulumi
 import pulumi_aws as aws
 
-env_file = os.getenv('GITHUB_ENV')
-
 # user data for install dependency
 user_data = """
 #!/bin/bash
@@ -63,9 +61,11 @@ server = aws.ec2.Instance("nginx",
 )
 print("EC2 Instance Creation Complete...")
 
+env_file = os.getenv('GITHUB_ENV')
+
 #Write ip to GITHUB_ENV
-ec2_ip=f'EC2_IP={server.public_ip}'
+
 with open(env_file,"a") as f:
-    f.write(ec2_ip)
+    f.write("EC2_IP={ip}".format(ip = server.public_ip))
 
 pulumi.export('public_ip', server.public_ip)
