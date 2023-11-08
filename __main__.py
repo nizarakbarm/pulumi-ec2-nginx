@@ -12,6 +12,7 @@ sudo systemctl enable nginx
 sudo systemctl start nginx
 """
 
+print("Create security group...")
 # Create Security Group
 security_group = aws.ec2.SecurityGroup("http-port",
         description="Allow HTTP traffic",
@@ -20,7 +21,9 @@ security_group = aws.ec2.SecurityGroup("http-port",
         protocol="tcp",
         cidr_blocks=['0.0.0.0/0']
 )
+print("Security group creation complete...")
 
+print("Create EC2 Instance...")
 # Create EC2 Instance
 server = aws.ec2.Instance("nginx",
         ami="ami-0ebcd68de1afe59cd",
@@ -28,5 +31,7 @@ server = aws.ec2.Instance("nginx",
         user_data=user_data,
         vpc_security_group_ids=[security_group.id]                         
 )
+print("EC2 Instance Creation Complete...")
+
 
 pulumi.export('public_ip', server.public_ip)
