@@ -64,7 +64,7 @@ server = aws.ec2.Instance("nginx",
 print("EC2 Instance Creation Complete...")
 
 http_ec2_ip = server.public_ip.apply(
-    lambda public_ip: "http://" + public_ip
+    lambda public_ip: f'http://{public_ip}/'
 )
 print(http_ec2_ip)
 r = requests.get(http_ec2_ip)
