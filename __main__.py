@@ -63,4 +63,3 @@ server = aws.ec2.Instance("nginx",
 print("EC2 Instance Creation Complete...")
 
 pulumi.export('public_ip', server.public_ip)
-pulumi.export('http_test_status_code', r.status_code)
