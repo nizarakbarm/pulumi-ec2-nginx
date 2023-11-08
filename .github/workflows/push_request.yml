@@ -28,12 +28,14 @@ jobs:
           stack-name: ${{env.STACK}}
         env:
           PULUMI_ACCESS_TOKEN: ${{secrets.PULUMI_ACCESS_TOKEN}}
+          STACK: ${{env.STACK}}
       - uses: pulumi/actions@v4
         with:
           command: up
           stack-name: ${{env.STACK}}
         env:
           PULUMI_ACCESS_TOKEN: ${{secrets.PULUMI_ACCESS_TOKEN}}
+          STACK: ${{env.STACK}}
       - name: Sleep for 5 minutes
         run: sleep 300s
         shell: bash
@@ -43,3 +45,4 @@ jobs:
           stack-name: ${{env.STACK}}
         env:
           PULUMI_ACCESS_TOKEN: ${{secrets.PULUMI_ACCESS_TOKEN}}
+          STACK: ${{env.STACK}}
