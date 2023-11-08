@@ -1,0 +1,32 @@
+name: deploy ec2 nginx at aws
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  deploy_ec2:
+    name: deploy ec2 nginx at aws
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.ARN_ROLE }}
+          aws-region: ${{ secrets.REGION }}
+      - run: pip install -r requirements.txt
+      - uses: pulumi/actions@v4
+        with:
+          command: preview
+          stack-name: dev
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+      - uses: pulumi/action@v4
+        with:
+          command: up -y
+          stack-name: dev
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
