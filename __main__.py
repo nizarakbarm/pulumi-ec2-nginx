@@ -66,7 +66,8 @@ print("EC2 Instance Creation Complete...")
 http_ec2_ip = server.public_ip.name.apply(
     lambda name: "http://" + name
 )
-r = requests.get(str(http_ec2_ip))
+print(http_ec2_ip)
+r = requests.get(http_ec2_ip)
 
 pulumi.export('public_ip', server.public_ip)
 pulumi.export('http_test_status_code', r.status_code)
