@@ -22,13 +22,13 @@ jobs:
           role-to-assume: ${{secrets.ARN_ROLE}}
           aws-region: ap-southeast-1
       - run: pip install -r requirements.txt
-      - uses: pulumi/actions@v4
-        with:
-          command: preview
-          stack-name: ${{vars.STACK}}
-        env:
-          PULUMI_ACCESS_TOKEN: ${{secrets.PULUMI_ACCESS_TOKEN}}
-          PUBLIC_KEY: ${{secrets.PUBLIC_KEY}}
+      # - uses: pulumi/actions@v4
+      #   with:
+      #     command: preview
+      #     stack-name: ${{vars.STACK}}
+      #   env:
+      #     PULUMI_ACCESS_TOKEN: ${{secrets.PULUMI_ACCESS_TOKEN}}
+      #     PUBLIC_KEY: ${{secrets.PUBLIC_KEY}}
       - uses: pulumi/actions@v4
         with:
           command: up
