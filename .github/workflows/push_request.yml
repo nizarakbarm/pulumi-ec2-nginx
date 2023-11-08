@@ -40,7 +40,7 @@ jobs:
         env:
           URL: "http://${{ steps.pulumi.outputs.public_ip }}"
         run: |
-          CODE=`curl -s -o /dev/null $URL --write-out %{stdout}`
+          CODE=`curl -XGET $URL --write-out '%{http_code}' -s -o /dev/null `
           if [[ $CODE!="200" ]]
           then
             echo "FAILED"
