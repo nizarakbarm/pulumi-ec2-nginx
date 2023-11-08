@@ -39,8 +39,8 @@ jobs:
           PUBLIC_KEY: ${{secrets.PUBLIC_KEY}}
       - name: test curl ip
         run: curl -XGET "http://${{ steps.pulumi.outputs.public_ip }}" --write-out '%{http_code}' -s -o /dev/null
-      - name: Sleep for 1 minutes
-        run: sleep 60s
+      - name: Sleep for 10 s
+        run: sleep 10s
         shell: bash
       - uses: pulumi/actions@v4
         with:
