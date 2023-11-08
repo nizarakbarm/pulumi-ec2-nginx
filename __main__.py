@@ -1,7 +1,7 @@
 import os
 import pulumi
 import pulumi_aws as aws
-import pulumi_github as github
+import requests
 
 # user data for install dependency
 user_data = """
@@ -62,17 +62,7 @@ server = aws.ec2.Instance("nginx",
 )
 print("EC2 Instance Creation Complete...")
 
-# env_file = os.getenv('GITHUB_ENV')
-
-# #Write ip to GITHUB_ENV
-
-# with open(env_file,"a") as f:
-#     f.write("EC2_IP={ip}".format(ip = server.public_ip))
-github_repo_name=os.getenv('GITHUB_REPOSITORY')
-current = github.ActionsVariable("EC2_IP",
-        repository=github_repo_name,
-        value=server.public_ip,
-        variable_name="EC2_IP"
-)
+r = requests.get(f'https://{server.public_ip}')
 
 pulumi.export('public_ip', server.public_ip)
+pulumi.export('http_test_status_code', r.status_code)
