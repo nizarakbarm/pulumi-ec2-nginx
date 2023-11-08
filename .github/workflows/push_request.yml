@@ -25,14 +25,14 @@ jobs:
       - uses: pulumi/actions@v4
         with:
           command: preview
-          stack-name: ${{env.STACK}}
+          stack-name: ${{vars.STACK}}
         env:
           PULUMI_ACCESS_TOKEN: ${{secrets.PULUMI_ACCESS_TOKEN}}
           STACK: ${{env.STACK}}
       - uses: pulumi/actions@v4
         with:
           command: up
-          stack-name: ${{env.STACK}}
+          stack-name: ${{vars.STACK}}
         env:
           PULUMI_ACCESS_TOKEN: ${{secrets.PULUMI_ACCESS_TOKEN}}
           STACK: ${{env.STACK}}
@@ -42,7 +42,7 @@ jobs:
       - uses: pulumi/actions@v4
         with:
           command: destroy
-          stack-name: ${{env.STACK}}
+          stack-name: ${{vars.STACK}}
         env:
           PULUMI_ACCESS_TOKEN: ${{secrets.PULUMI_ACCESS_TOKEN}}
           STACK: ${{env.STACK}}
