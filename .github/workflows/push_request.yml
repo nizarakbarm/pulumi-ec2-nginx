@@ -7,6 +7,7 @@ jobs:
   deploy_ec2:
     name: deploy ec2 nginx at aws
     runs-on: ubuntu-latest
+    environment: development
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
@@ -16,6 +17,9 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.ARN_ROLE }}
+          aws-region: ${{ secrets.REGION }}
+        env:
+          ARN_ROLE: ${{ secrets.ARN_ROLE }}
           aws-region: ${{ secrets.REGION }}
       - run: pip install -r requirements.txt
       - uses: pulumi/actions@v4
