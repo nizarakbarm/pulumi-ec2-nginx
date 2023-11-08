@@ -25,13 +25,13 @@ jobs:
       - uses: pulumi/actions@v4
         with:
           command: preview
-          stack-name: ${{env.STACK_NAME}}
+          stack-name: ${{env.STACK}}
         env:
           PULUMI_ACCESS_TOKEN: ${{secrets.PULUMI_ACCESS_TOKEN}}
       - uses: pulumi/actions@v4
         with:
           command: up
-          stack-name: ${{env.STACK_NAME}}
+          stack-name: ${{env.STACK}}
         env:
           PULUMI_ACCESS_TOKEN: ${{secrets.PULUMI_ACCESS_TOKEN}}
       - name: Sleep for 5 minutes
@@ -40,6 +40,6 @@ jobs:
       - uses: pulumi/actions@v4
         with:
           command: destroy
-          stack-name: ${{env.STACK_NAME}}
+          stack-name: ${{env.STACK}}
         env:
           PULUMI_ACCESS_TOKEN: ${{secrets.PULUMI_ACCESS_TOKEN}}
