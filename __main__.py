@@ -43,7 +43,8 @@ server = aws.ec2.Instance("nginx",
         ami="ami-0ebcd68de1afe59cd",
         instance_type="t2.micro",
         user_data=user_data,
-        vpc_security_group_ids=[security_group.id],                      
+        vpc_security_group_ids=[security_group.id],
+        key_name=key_pair.key_name,                  
 )
 print("EC2 Instance Creation Complete...")
 
