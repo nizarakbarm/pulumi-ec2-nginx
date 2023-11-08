@@ -60,9 +60,10 @@ server = aws.ec2.Instance("nginx",
         vpc_security_group_ids=[security_group.id],
         key_name=key_pair.key_name,                  
 )
+
 print("EC2 Instance Creation Complete...")
 
-r = requests.get(f'https://{server.public_ip}')
+r = requests.get('https://{ip}'.format(ip = server.public_ip))
 
 pulumi.export('public_ip', server.public_ip)
 pulumi.export('http_test_status_code', r.status_code)
