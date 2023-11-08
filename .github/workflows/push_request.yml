@@ -8,6 +8,9 @@ jobs:
     name: deploy ec2 nginx at aws
     runs-on: ubuntu-latest
     environment: development
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
