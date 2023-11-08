@@ -1,0 +1,6 @@
+name: pulumi-ec2-nginx
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: Pulumi ec2 python nginx
