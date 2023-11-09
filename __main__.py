@@ -47,6 +47,7 @@ security_group = aws.ec2.SecurityGroup("Security Group EC2",
 )
 print("Security group creation complete...")
 
+# Create EC2 KeyPair
 print("Create AWS EC2 KeyPair...")
 key_pair = aws.ec2.KeyPair("key-pair",public_key=os.getenv('PUBLIC_KEY'))
 
@@ -62,4 +63,5 @@ server = aws.ec2.Instance("nginx",
 
 print("EC2 Instance Creation Complete...")
 
+#Export public ip
 pulumi.export('public_ip', server.public_ip)
