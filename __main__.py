@@ -1,9 +1,11 @@
+""" Provision Nginx inside EC2 AWS by using Pulumi """
+
 import os
 import pulumi
 import pulumi_aws as aws
 
 # user data for install dependency
-user_data = """
+USER_DATA = """
 #!/bin/bash
 sudo yum update -y
 sudo yum upgrade -y
@@ -56,9 +58,9 @@ print("Create EC2 Instance...")
 server = aws.ec2.Instance("nginx",
         ami="ami-0ebcd68de1afe59cd",
         instance_type="t2.micro",
-        user_data=user_data,
+        user_data=USER_DATA,
         vpc_security_group_ids=[security_group.id],
-        key_name=key_pair.key_name,                  
+        key_name=key_pair.key_name,
 )
 
 print("EC2 Instance Creation Complete...")
