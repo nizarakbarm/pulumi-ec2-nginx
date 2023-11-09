@@ -22,6 +22,10 @@ jobs:
           role-to-assume: ${{secrets.ARN_ROLE}}
           aws-region: ap-southeast-1
       - run: pip install -r requirements.txt
+      - run: pip install pylint
+      - name: run pylint to check pulumi python script
+        id: 'pylint'
+        run: pylint __main__.py
       # - uses: pulumi/actions@v4
       #   with:
       #     command: preview
