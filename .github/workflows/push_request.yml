@@ -41,11 +41,11 @@ jobs:
         env:
           PULUMI_ACCESS_TOKEN: ${{secrets.PULUMI_ACCESS_TOKEN}}
           PUBLIC_KEY: ${{secrets.PUBLIC_KEY}}
-      - name: test curl ip
-        run: curl -XGET "http://${{ steps.pulumi.outputs.public_ip }}" --write-out '%{http_code}' -s -o /dev/null
       - name: Sleep for 10 s
         run: sleep 10s
         shell: bash
+      - name: test curl ip
+        run: curl -XGET "http://${{ steps.pulumi.outputs.public_ip }}" --write-out '%{http_code}' -s -o /dev/null
       - uses: pulumi/actions@v4
         with:
           command: destroy
